@@ -22,6 +22,8 @@ The subject were investigated in 11 unaffected individuals (42.2 0xB1; 3.4 years
 
 Using the SureSelectXT Methy-Seq Library Kit, the methylation levels of a total of 66,279,954 CpG sites were measured.
 
+<img width="593" alt="Screenshot 2022-12-15 at 4 28 27 PM" src="https://user-images.githubusercontent.com/83803247/207806119-6cd1df47-ba02-4387-b802-442464cbc388.png">
+
 # Python code
 
 * CMT1A_vs_Control_t_test.py
