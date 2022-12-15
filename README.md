@@ -26,7 +26,7 @@ Using the SureSelectXT Methy-Seq Library Kit, the methylation levels of a total 
 
 * CMT1A_vs_Control_t_test.py
 
-![figure1. psedo-code for CMT1A_vs_Control_t_test.py]("https://user-images.githubusercontent.com/83803247/207803528-6e4a5388-f253-4a6d-bc2c-84e113c2f561.png")
+![figure1. psedo-code for CMT1A_vs_Control_t_test.py]("https://user-images.githubusercontent.com/83803247/207804755-71e58a59-b550-4c34-a8ad-0569395c14ed.png")
 
 - correlation.py
 
