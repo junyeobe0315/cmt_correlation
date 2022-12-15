@@ -6,3 +6,5 @@ excel_and_csv
 cor_data.csv
 .DS_Store
 .vscode
+man_plot.py
+data_collect.py

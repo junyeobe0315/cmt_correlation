@@ -24,7 +24,7 @@ def read_data(FILE_NAME):
 
     return final_id, data, cmtns
 
-def draw_scatter_plot(FILE_NAME):
+def draw_scatter_plot(FILE_NAME, vis=False):
     final_id, data, cmtns = read_data(FILE_NAME)
     for idx in final_id:
         met_lev = list(map(float, data.iloc[idx, 1:23].values))
@@ -35,13 +35,15 @@ def draw_scatter_plot(FILE_NAME):
             r_val = data.loc[idx, "Pearson_r"]
         if test == "Spearman test":
             r_val = data.loc[idx, "Spearman_r"]
-
-        plt.title("{} / pos : {} / r value :{}".format(FILE_NAME, pos, r_val))
-        plt.xlabel("CMTNS")
-        plt.ylim([0,1])
-        plt.ylabel("Met level")
-        plt.scatter(cmtns, met_lev)
-        plt.show()
+        if vis:
+            plt.title("{} / pos : {} / r value :{}".format(FILE_NAME, pos, r_val))
+            plt.xlabel("CMTNS")
+            plt.ylim([0,1])
+            plt.ylabel("Met level")
+            plt.scatter(cmtns, met_lev)
+            plt.show()
+        if vis==False:
+            pass
 
 if __name__ == "__main__":
     FILE_NAMES = ["Chr1", "Chr2", "Chr3",
