@@ -6,8 +6,6 @@ import csv # csv 파일을 다루기 위해 라이브러리 사용
 import warnings
 from tqdm import tqdm
 
-warnings.filterwarnings('ignore')
-
 # 엑셀을 불러오고 가공할 수 있는 자료구조로 변경
 
 data = pd.read_csv("./excel_and_csv/Chr5.csv", low_memory=False) # csv 파일 불러오기
