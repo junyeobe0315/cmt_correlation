@@ -34,6 +34,13 @@ Using the SureSelectXT Methy-Seq Library Kit, the methylation levels of a total 
     
     fig 2. pesudo code
  
+<img width="331" alt="Screenshot 2022-12-15 at 5 09 54 PM" src="https://user-images.githubusercontent.com/83803247/207807522-9055b672-7229-4c92-a1f8-02e2633c068e.png">
+    
+    fig 3. Levene's test
+
+<img width="762" alt="Screenshot 2022-12-15 at 5 17 37 PM" src="https://user-images.githubusercontent.com/83803247/207808037-796aacc2-e274-4d8c-931f-93069bf71cc7.png">
+
+    fig 4. Student's t-test
 
 - correlation.py
 
