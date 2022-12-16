@@ -42,7 +42,9 @@ Using the SureSelectXT Methy-Seq Library Kit, the methylation levels of a total 
 
     fig 4. Student's t-test
 
-in CMT1A_vs_Control_t_test.py we used
+In CMT1A_vs_Control_t_test.py we used Levene's test to check normality.  
+If the p-value of Levene's test is over 0.05 (In case of Equal variance) we used Student's test of equal variance to check the t value of position.
+If the p-value of Levene's test is under 0.05 (In case of non-Equal variance) we used Student's test of non-equal variance to check the t value of position.
 
 - correlation.py
 
