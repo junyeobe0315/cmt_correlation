@@ -42,6 +42,8 @@ Using the SureSelectXT Methy-Seq Library Kit, the methylation levels of a total 
 
     fig 4. Student's t-test
 
+in CMT1A_vs_Control_t_test.py we used
+
 - correlation.py
 
 
