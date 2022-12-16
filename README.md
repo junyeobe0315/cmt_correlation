@@ -9,6 +9,7 @@ This study was performed to determine whether epigenetic factors affected to sev
 ---
 
 # Used Libraries
+- python : 3.10
 * numpy 
 - pandas : most important used
 * matplotlib
@@ -47,6 +48,13 @@ In CMT1A_vs_Control_t_test.py we used Levene's test to check normality.
 If the p-value of Levene's test is over 0.05 (In case of Equal variance) we used Student's test of equal variance to check the t value of position.
 
 If the p-value of Levene's test is under 0.05 (In case of non-Equal variance) we used Student's test of non-equal variance to check the t value of position.
+
+
+The plot below is the result of Student's t-test.
+
+
+<img width="267" alt="Screenshot 2022-12-16 at 1 31 54 PM" src="https://user-images.githubusercontent.com/83803247/208022734-7b687bb0-4c5d-429a-8c13-33da93b9001e.png">
+
 
 - correlation.py
 
