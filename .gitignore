@@ -2,10 +2,10 @@
 final_cor
 cor_data
 raw_data
-excel_and_csv
 cor_data.csv
 .DS_Store
 .vscode
 man_plot.py
 data_collect.py
 de_novo_data
+t_test
