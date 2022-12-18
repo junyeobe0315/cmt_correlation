@@ -63,18 +63,8 @@ for number in numbers:
             mann_test = scipy.stats.mannwhitneyu(patient, non_patient)
             Levene.append("nan")
             Mann.append(mann_test.pvalue)
-        
-            if mann_test.pvalue > 0.05:
-                # equal var
-                Var.append("등분산")
-                t_test = scipy.stats.ttest_ind(patient, non_patient, equal_var=True)
-                t_vals.append(t_test.pvalue)
-        
-            else:
-                # non equal var
-                Var.append("이분산")
-                t_test = scipy.stats.ttest_ind(patient, non_patient, equal_var=False)
-                t_vals.append(t_test.pvalue)
+            Var.append("정규성 불만족")
+            t_vals.append("정규성 불만족")
 
     Levene = pd.DataFrame(Levene)
     Mann = pd.DataFrame(Mann)
