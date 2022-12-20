@@ -19,7 +19,7 @@ This study was performed to determine whether epigenetic factors affected to sev
 ---
 # Used Dataset
 
-The subject were investigated in 11 unaffected individuals (42.2 0xB1; 3.4 years old) and 22 CMT1A patients (46.4 0xB1; 3.5 years old) in male.
+The subject were investigated in 11 unaffected individuals (42.2 +- 3.4 years old) and 22 CMT1A patients (46.4 +- 3.5 years old) in male.
 
 Using the SureSelectXT Methy-Seq Library Kit, the methylation levels of a total of 66,279,954 CpG sites were measured.
 
