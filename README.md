@@ -19,7 +19,7 @@ This study was performed to determine whether epigenetic factors affected to sev
 ---
 # Used Dataset
 
-The subject were investigated in 11 unaffected individuals (42.2 0xB1; 3.4 years old) and 22 CMT1A patients (46.4 0xB1; 3.5 years old) in male.
+The subject were investigated in 11 unaffected individuals (42.2 +- 3.4 years old) and 22 CMT1A patients (46.4 +- 3.5 years old) in male.
 
 Using the SureSelectXT Methy-Seq Library Kit, the methylation levels of a total of 66,279,954 CpG sites were measured.
 
@@ -81,6 +81,7 @@ Using the SureSelectXT Methy-Seq Library Kit, the methylation levels of a total 
 * vis_cor.py / vis_qqplot.py
 
     These two codes were used to plot the correlation visualization and qqplot, respectively.
+<<<<<<< HEAD
 
     ![example_1](https://user-images.githubusercontent.com/83803247/208644487-fe52e5c1-c734-41cb-8104-ed422d52e432.png)
     
@@ -89,3 +90,5 @@ Using the SureSelectXT Methy-Seq Library Kit, the methylation levels of a total 
         fig 8. example images from result of vis_cor.py
     
     
+=======
+>>>>>>> a3e9740acd51c38fc70622bdb70905d1f94784dd
