@@ -55,4 +55,4 @@ if __name__ == "__main__":
                     "Chr19", "Chr20", "Chr21",
                     "Chr22", "ChrX", "ChrY",]
     for FILE_NAME in FILE_NAMES:
-        draw_scatter_plot(FILE_NAME)
+        draw_scatter_plot(FILE_NAME, vis=True)
