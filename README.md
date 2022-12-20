@@ -9,7 +9,7 @@ This study was performed to determine whether epigenetic factors affected to sev
 ---
 
 # Used Libraries
-- python : 3.10
+- python : 3.10.8
 * numpy : 1.23.4
 - pandas : 1.5.1 (most used)
 * matplotlib : 3.6.2
