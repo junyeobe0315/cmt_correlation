@@ -69,7 +69,7 @@ def avg_and_std_dev(path):
     return df
                     
 if __name__ == "__main__":
-    path = "./de_novo_data/final_denovo/chr21.csv"
+    path = "./denovo_data/final_denovo/chr21.csv"
     df = avg_and_std_dev(path)
     print(df)
     df.to_csv("test.csv")
