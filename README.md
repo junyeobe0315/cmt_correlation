@@ -81,7 +81,6 @@ Using the SureSelectXT Methy-Seq Library Kit, the methylation levels of a total 
 * vis_cor.py / vis_qqplot.py
 
     These two codes were used to plot the correlation visualization and qqplot, respectively.
-<<<<<<< HEAD
 
     ![example_1](https://user-images.githubusercontent.com/83803247/208644487-fe52e5c1-c734-41cb-8104-ed422d52e432.png)
     
@@ -91,4 +90,3 @@ Using the SureSelectXT Methy-Seq Library Kit, the methylation levels of a total 
     
     
 =======
->>>>>>> a3e9740acd51c38fc70622bdb70905d1f94784dd
