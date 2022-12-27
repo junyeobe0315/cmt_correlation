@@ -29,7 +29,7 @@ def read_10(path):
             else:
                 temp_met.append(num)
                 count += 1
-        if len(temp_met) == 10:
+        if len(temp_met) == 11:
             df[p] = temp_met
             pos.append(p)
     df = pd.DataFrame(df)
@@ -91,10 +91,10 @@ def concat_(denovo_path, non_denovo_path):
     d_pos = denovo_df.index
     n_pos = non_denovo_df.index
     d_name = denovo_df.columns.tolist()
-    d_name = d_name[0:9]
+    d_name = d_name[0:11]
     
     n_name = non_denovo_df.columns.tolist()
-    n_name = n_name[0:9]
+    n_name = n_name[0:11]
     name = []
     name.extend(d_name)
     name.extend(n_name)
@@ -110,13 +110,14 @@ def concat_(denovo_path, non_denovo_path):
                 d_p = d_pos[j]
                 if d_p == n_p:
                     break
+                
             d_row = denovo_df.iloc[i,:]
             n_row = non_denovo_df.iloc[j,:]
             d_avg = float(d_row[-2])
             n_avg = float(n_row[-2])
             row = []
-            d_met = list(map(float,d_row[0:9]))
-            n_met = list(map(float,n_row[0:9]))
+            d_met = list(map(float,d_row[0:11]))
+            n_met = list(map(float,n_row[0:11]))
             row.extend(d_met)
             row.extend(n_met)
             row.append(d_avg - n_avg)
@@ -128,7 +129,7 @@ def concat_(denovo_path, non_denovo_path):
                 t_val = p_val.pvalue
             row.append(t_val)
             temp[n_p] = row
-            
+
     else:
         L_df = non_denovo_df.shape[0]
         s_df = denovo_df.shape[0]
@@ -143,8 +144,8 @@ def concat_(denovo_path, non_denovo_path):
             d_avg = float(d_row[-2])
             n_avg = float(n_row[-2])
             row = []
-            d_met = list(map(float,d_row[0:9]))
-            n_met = list(map(float,n_row[0:9]))
+            d_met = list(map(float,d_row[0:11]))
+            n_met = list(map(float,n_row[0:11]))
             row.extend(d_met)
             row.extend(n_met)
             row.append(d_avg - n_avg)
@@ -172,17 +173,8 @@ def std_dev_to_csv(path_in, path_out):
     return 0
 
 if __name__ == "__main__":
-    denovo_path = "./denovo_data/final_denovo/chrX.csv"
-    non_denovo_path = "denovo_data/final_non_denovo/chrX.csv"
-    df = ttest_to_csv(denovo_path, non_denovo_path, './test.csv')
-    df = std_dev_to_csv(denovo_path, './test2.csv')
-    
-
-
-
-
-
-
-
-
-
+    denovo_path = "./denovo/dchr22.csv"
+    non_denovo_path = "denovo/nchr22.csv"
+    df = ttest_to_csv(denovo_path, non_denovo_path, './final_denovo/chr22.csv')
+    df = std_dev_to_csv(denovo_path, './final_denovo/dchr22.csv')
+    df = std_dev_to_csv(denovo_path, './final_denovo/nchr22.csv')
