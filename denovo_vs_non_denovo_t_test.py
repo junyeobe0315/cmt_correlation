@@ -45,11 +45,8 @@ def normality_test(path):
     for i in tqdm(range(data.shape[0])):
         met = data.iloc[i,:].values.tolist()
         temp_met = list(map(float, met))
-        if len(met) < 3:
-            met.append("nan")
-        else:
-            shapiro_test = scipy.stats.shapiro(temp_met)
-            met.append(float(shapiro_test.pvalue))
+        shapiro_test = scipy.stats.shapiro(temp_met)
+        met.append(float(shapiro_test.pvalue))
         temp[i] = met
     met_df = pd.DataFrame(temp)
     met_df = met_df.T
@@ -88,75 +85,78 @@ def avg_and_std_dev(path):
 def concat_(denovo_path, non_denovo_path):
     denovo_df = avg_and_std_dev(denovo_path)
     non_denovo_df = avg_and_std_dev(non_denovo_path)
-    d_pos = denovo_df.index
-    n_pos = non_denovo_df.index
+
+    d_pos = denovo_df.index.tolist()
+    n_pos = non_denovo_df.index.tolist()
+
     d_name = denovo_df.columns.tolist()
     d_name = d_name[0:11]
     
     n_name = non_denovo_df.columns.tolist()
     n_name = n_name[0:11]
+
     name = []
     name.extend(d_name)
     name.extend(n_name)
     name.extend(["delta", "t test"])
+
     temp = {}
 
     if denovo_df.shape[0] >= non_denovo_df.shape[0]:
-        L_df = denovo_df.shape[0]
         s_df = non_denovo_df.shape[0]
         for i in tqdm(range(s_df)):
             n_p = n_pos[i]
-            for j in range(i, L_df):
-                d_p = d_pos[j]
-                if d_p == n_p:
-                    break
-                
-            d_row = denovo_df.iloc[i,:]
-            n_row = non_denovo_df.iloc[j,:]
-            d_avg = float(d_row[-2])
-            n_avg = float(n_row[-2])
-            row = []
-            d_met = list(map(float,d_row[0:11]))
-            n_met = list(map(float,n_row[0:11]))
-            row.extend(d_met)
-            row.extend(n_met)
-            row.append(d_avg - n_avg)
-            if d_row[-1] == n_row[-1]:
-                p_val = scipy.stats.ttest_ind(d_met, n_met, equal_var=True)
-                t_val = p_val.pvalue
+            if n_p in d_pos:
+                pos = n_p
+                j = d_pos.index(pos)
+                d_row = denovo_df.iloc[i,:]
+                n_row = non_denovo_df.iloc[j,:]
+                d_avg = float(d_row[-2])
+                n_avg = float(n_row[-2])
+                row = []
+                d_met = list(map(float,d_row[0:11]))
+                n_met = list(map(float,n_row[0:11]))
+                row.extend(d_met)
+                row.extend(n_met)
+                row.append(d_avg - n_avg)
+                if d_row[-1] == n_row[-1]:
+                    p_val = scipy.stats.ttest_ind(d_met, n_met, equal_var=True)
+                    t_val = p_val.pvalue
+                else:
+                    p_val = scipy.stats.ttest_ind(d_met, n_met, equal_var=False)
+                    t_val = p_val.pvalue
+                row.append(t_val)
+                temp[pos] = row
             else:
-                p_val = scipy.stats.ttest_ind(d_met, n_met, equal_var=False)
-                t_val = p_val.pvalue
-            row.append(t_val)
-            temp[n_p] = row
+                pass
 
     else:
-        L_df = non_denovo_df.shape[0]
         s_df = denovo_df.shape[0]
         for i in tqdm(range(s_df)):
             d_p = d_pos[i]
-            for j in range(i, L_df):
-                n_p = n_pos[j]
-                if d_p == n_p:
-                    break
-            d_row = denovo_df.iloc[i,:]
-            n_row = non_denovo_df.iloc[j,:]
-            d_avg = float(d_row[-2])
-            n_avg = float(n_row[-2])
-            row = []
-            d_met = list(map(float,d_row[0:11]))
-            n_met = list(map(float,n_row[0:11]))
-            row.extend(d_met)
-            row.extend(n_met)
-            row.append(d_avg - n_avg)
-            if d_row[-1] == n_row[-1]:
-                p_val = scipy.stats.ttest_ind(d_met, n_met, equal_var=True)
-                t_val = p_val.pvalue
+            if d_p in n_pos:
+                pos = d_p
+                j = n_pos.index(pos)
+                d_row = denovo_df.iloc[i,:]
+                n_row = non_denovo_df.iloc[j,:]
+                d_avg = float(d_row[-2])
+                n_avg = float(n_row[-2])
+                row = []
+                d_met = list(map(float,d_row[0:11]))
+                n_met = list(map(float,n_row[0:11]))
+                row.extend(d_met)
+                row.extend(n_met)
+                row.append(d_avg - n_avg)
+                if d_row[-1] == n_row[-1]:
+                    p_val = scipy.stats.ttest_ind(d_met, n_met, equal_var=True)
+                    t_val = p_val.pvalue
+                else:
+                    p_val = scipy.stats.ttest_ind(d_met, n_met, equal_var=False)
+                    t_val = p_val.pvalue
+                row.append(t_val)
+                temp[pos] = row
             else:
-                p_val = scipy.stats.ttest_ind(d_met, n_met, equal_var=False)
-                t_val = p_val.pvalue
-            row.append(t_val)
-            temp[d_p] = row
+                pass
     df = pd.DataFrame(temp)
     df = df.T
     df.columns = name
@@ -177,4 +177,4 @@ if __name__ == "__main__":
     non_denovo_path = "denovo/nchr22.csv"
     df = ttest_to_csv(denovo_path, non_denovo_path, './final_denovo/chr22.csv')
     df = std_dev_to_csv(denovo_path, './final_denovo/dchr22.csv')
-    df = std_dev_to_csv(denovo_path, './final_denovo/nchr22.csv')
+    df = std_dev_to_csv(non_denovo_path, './final_denovo/nchr22.csv')
