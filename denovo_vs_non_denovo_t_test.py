@@ -119,7 +119,9 @@ def concat_(denovo_path, non_denovo_path):
                 row.extend(d_met)
                 row.extend(n_met)
                 row.append(d_avg - n_avg)
-                if d_row[-1] == n_row[-1]:
+                levene_test = scipy.stats.levene(d_met, n_met)
+                levene = levene_test.pvalue
+                if levene > 0.05:
                     p_val = scipy.stats.ttest_ind(d_met, n_met, equal_var=True)
                     t_val = p_val.pvalue
                 else:
@@ -147,7 +149,9 @@ def concat_(denovo_path, non_denovo_path):
                 row.extend(d_met)
                 row.extend(n_met)
                 row.append(d_avg - n_avg)
-                if d_row[-1] == n_row[-1]:
+                levene_test = scipy.stats.levene(d_met, n_met)
+                levene = levene_test.pvalue
+                if levene > 0.05:
                     p_val = scipy.stats.ttest_ind(d_met, n_met, equal_var=True)
                     t_val = p_val.pvalue
                 else:
