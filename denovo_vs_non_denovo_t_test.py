@@ -110,25 +110,30 @@ def concat_(denovo_path, non_denovo_path):
                 pos = n_p
                 j = d_pos.index(pos)
                 d_row = denovo_df.iloc[i,:]
-                n_row = non_denovo_df.iloc[j,:]
-                d_avg = float(d_row[-2])
-                n_avg = float(n_row[-2])
-                row = []
-                d_met = list(map(float,d_row[0:11]))
-                n_met = list(map(float,n_row[0:11]))
-                row.extend(d_met)
-                row.extend(n_met)
-                row.append(d_avg - n_avg)
-                levene_test = scipy.stats.levene(d_met, n_met)
-                levene = levene_test.pvalue
-                if levene > 0.05:
-                    p_val = scipy.stats.ttest_ind(d_met, n_met, equal_var=True)
-                    t_val = p_val.pvalue
-                else:
-                    p_val = scipy.stats.ttest_ind(d_met, n_met, equal_var=False)
-                    t_val = p_val.pvalue
-                row.append(t_val)
-                temp[pos] = row
+
+                try:
+                    n_row = non_denovo_df.iloc[j,:]
+                    d_avg = float(d_row[-2])
+                    n_avg = float(n_row[-2])
+                    row = []
+                    d_met = list(map(float,d_row[0:11]))
+                    n_met = list(map(float,n_row[0:11]))
+                    row.extend(d_met)
+                    row.extend(n_met)
+                    row.append(d_avg - n_avg)
+                    levene_test = scipy.stats.levene(d_met, n_met)
+                    levene = levene_test.pvalue
+                    if levene > 0.05:
+                        p_val = scipy.stats.ttest_ind(d_met, n_met, equal_var=True)
+                        t_val = p_val.pvalue
+                    else:
+                        p_val = scipy.stats.ttest_ind(d_met, n_met, equal_var=False)
+                        t_val = p_val.pvalue
+                    row.append(t_val)
+                    temp[pos] = row
+                except:
+                    pass
+
             else:
                 pass
 
@@ -177,8 +182,25 @@ def std_dev_to_csv(path_in, path_out):
     return 0
 
 if __name__ == "__main__":
-    denovo_path = "./denovo/dchr22.csv"
-    non_denovo_path = "denovo/nchr22.csv"
-    df = ttest_to_csv(denovo_path, non_denovo_path, './final_denovo/chr22.csv')
-    df = std_dev_to_csv(denovo_path, './final_denovo/dchr22.csv')
-    df = std_dev_to_csv(non_denovo_path, './final_denovo/nchr22.csv')
+    denovo = ["./denovo/dchr1.csv","./denovo/dchr2.csv","./denovo/dchr3.csv","./denovo/dchr4.csv","./denovo/dchr5.csv",
+                "./denovo/dchr6.csv","./denovo/dchr7.csv","./denovo/dchr8.csv","./denovo/dchr9.csv","./denovo/dchr10.csv",
+                "./denovo/dchr11.csv","./denovo/dchr12.csv","./denovo/dchr13.csv","./denovo/dchr14.csv","./denovo/dchr15.csv",
+                "./denovo/dchr16.csv","./denovo/dchr17.csv","./denovo/dchr18.csv","./denovo/dchr19.csv","./denovo/dchr20.csv",
+                "./denovo/dchr21.csv","./denovo/dchrX.csv","./denovo/dchrY.csv"]
+
+    non_denovo = ["./denovo/nchr1.csv","./denovo/nchr2.csv","./denovo/nchr3.csv","./denovo/nchr4.csv","./denovo/nchr5.csv",
+                "./denovo/nchr6.csv","./denovo/nchr7.csv","./denovo/nchr8.csv","./denovo/nchr9.csv","./denovo/nchr10.csv",
+                "./denovo/nchr11.csv","./denovo/nchr12.csv","./denovo/nchr13.csv","./denovo/nchr14.csv","./denovo/nchr15.csv",
+                "./denovo/nchr16.csv","./denovo/nchr17.csv","./denovo/nchr18.csv","./denovo/nchr19.csv","./denovo/nchr20.csv",
+                "./denovo/nchr21.csv","./denovo/nchrX.csv","./denovo/nchrY.csv"]
+
+                
+    for i in range(len(denovo)):
+        denovo_path = denovo[i]
+        non_denovo_path = non_denovo[i]
+        print(denovo_path)
+        print(non_denovo_path)
+        df = ttest_to_csv(denovo_path, non_denovo_path, './final_denovo/chr{}.csv'.format(i+1))
+        df = std_dev_to_csv(denovo_path, './final_denovo/dchr{}.csv'.format(i+1))
+        df = std_dev_to_csv(non_denovo_path, './final_denovo/nchr{}.csv'.format(i+1))
+        
