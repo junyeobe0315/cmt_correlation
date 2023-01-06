@@ -99,14 +99,21 @@ def concat_(denovo_path, non_denovo_path):
             d_temp = list(map(float,d_data[:11]))
             n_temp = list(map(float,n_data[:11]))
             levene = scipy.stats.levene(d_temp, n_temp).pvalue
+            if levene < 0.05:
+                t_test = scipy.stats.ttest_ind(d_temp, n_temp, equal_var=False).pvalue
+            else:
+                t_test = scipy.stats.ttest_ind(d_temp, n_temp, equal_var=True).pvalue
             temp.append(delta)
             temp.append(levene)
+            temp.append(t_test)
         else:
+            temp.append("nan")
             temp.append("nan")
             temp.append("nan")
         final_data[p] = temp
     name.append("delta")
-    name.append("levene t test")
+    name.append("levene test")
+    name.append("t test p value")
     
     data = pd.DataFrame(final_data)
     data = data.T
