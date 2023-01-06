@@ -40,12 +40,11 @@ def normality_test(path):
     for pos in data_dict:
         met = data_dict[pos]
         count = int(met[-1])
-    
         if count == 11:
             temp_met = met[:11]
-            temp_met = list(map(float, met))
+            temp_met = list(map(float, temp_met))
             shapiro_test = scipy.stats.shapiro(temp_met)
-            met.append(float(shapiro_test.pvalue))
+            met.append(shapiro_test.pvalue)
         else:
             met.append("nan")
 
