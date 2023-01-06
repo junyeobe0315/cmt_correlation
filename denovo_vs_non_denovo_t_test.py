@@ -124,23 +124,28 @@ if __name__ == "__main__":
                 "./denovo/dchr6.csv","./denovo/dchr7.csv","./denovo/dchr8.csv","./denovo/dchr9.csv","./denovo/dchr10.csv",
                 "./denovo/dchr11.csv","./denovo/dchr12.csv","./denovo/dchr13.csv","./denovo/dchr14.csv","./denovo/dchr15.csv",
                 "./denovo/dchr16.csv","./denovo/dchr17.csv","./denovo/dchr18.csv","./denovo/dchr19.csv","./denovo/dchr20.csv",
-                "./denovo/dchr21.csv","./denovo/dchrX.csv","./denovo/dchrY.csv"]
+                "./denovo/dchr21.csv","./denovo/dchr22.csv"]
 
     non_denovo = ["./denovo/nchr1.csv","./denovo/nchr2.csv","./denovo/nchr3.csv","./denovo/nchr4.csv","./denovo/nchr5.csv",
                 "./denovo/nchr6.csv","./denovo/nchr7.csv","./denovo/nchr8.csv","./denovo/nchr9.csv","./denovo/nchr10.csv",
                 "./denovo/nchr11.csv","./denovo/nchr12.csv","./denovo/nchr13.csv","./denovo/nchr14.csv","./denovo/nchr15.csv",
                 "./denovo/nchr16.csv","./denovo/nchr17.csv","./denovo/nchr18.csv","./denovo/nchr19.csv","./denovo/nchr20.csv",
-                "./denovo/nchr21.csv","./denovo/nchrX.csv","./denovo/nchrY.csv"]
-    test_path_d = "./denovo/dchrY.csv"
-    test_path_n = "./denovo/nchrY.csv"
-
-    data = to_csv_(test_path_d, test_path_n, './test.csv')
-    print(data)
-    exit
+                "./denovo/nchr21.csv","./denovo/nchr22.csv"]
+    
+    
     for i in range(len(denovo)):
         denovo_path = denovo[i]
         non_denovo_path = non_denovo[i]
         print(denovo_path)
         print(non_denovo_path)
         df = to_csv_(denovo_path, non_denovo_path, './final_denovo/chr{}.csv'.format(i+1))
-        
+    
+    denovo_x = "./denovo/dchrX.csv"
+    non_denovo_x = "./denovo/nchrX.csv"
+    df = to_csv_(denovo_x, non_denovo_x, "./final_denovo/chrX.csv")
+
+    denovo_y = "./denovo/dchrY.csv"
+    non_denovo_y = "./denovo/nchrY.csv"
+    df = to_csv_(denovo_y, non_denovo_y, "./final_denovo/chrY.csv")
+
+    
