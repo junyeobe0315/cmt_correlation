@@ -15,12 +15,12 @@ def read_data(path):
 
 def count_(path):
     data, positions, name = read_data(path)
-    name = name[1:]
+    name = name[1:11] # 11 지우면 16년도 데이터 지원
     name.append("count")
     df = {}
     for i in tqdm(range(data.shape[0])):
         p = positions[i]
-        met = data.iloc[i,:].values.tolist()
+        met = data.iloc[i,:10].values.tolist() # 10 지우면 16년도 데이터 지원
         count = 0
         temp_met = []
         for num in met:
@@ -34,14 +34,13 @@ def count_(path):
     return df, name
 
 def normality_test(path):
-    temp = {}
     data_dict, name = count_(path)
     print("Shapiro test 진행")
     for pos in data_dict:
         met = data_dict[pos]
         count = int(met[-1])
-        if count == 11:
-            temp_met = met[:11]
+        if count == 10:
+            temp_met = met[:10]
             temp_met = list(map(float, temp_met))
             shapiro_test = scipy.stats.shapiro(temp_met)
             met.append(shapiro_test.pvalue)
@@ -57,11 +56,11 @@ def avg_and_std_dev(path):
     print("평균, 표준편차 구하기 시작")
     for pos in data_dict:
         data = data_dict[pos]
-        if int(data[-2]) != 11: # count
+        if int(data[-2]) != 10: # count
             data.append("nan")
             data.append("nan")
         else:
-            temp = data[:11]
+            temp = data[:10]
             temp = list(map(float, temp))
             data.append(sum(temp)/len(temp)) # 평균
             data.append(np.std(temp)) # 표준편차
@@ -94,10 +93,10 @@ def concat_(denovo_path, non_denovo_path):
         n_count = n_data[-4]
         temp.extend(d_data)
         temp.extend(n_data)
-        if (int(d_count) == 11 and int(n_count) == 11):
+        if (int(d_count) == 10 and int(n_count) == 10): # == 10 이면 16년도 데이터 제외함
             delta = float(d_data[-2]) - float(n_data[-2])
-            d_temp = list(map(float,d_data[:11]))
-            n_temp = list(map(float,n_data[:11]))
+            d_temp = list(map(float,d_data[:10]))
+            n_temp = list(map(float,n_data[:10]))
             levene = scipy.stats.levene(d_temp, n_temp).pvalue
             if levene < 0.05:
                 t_test = scipy.stats.ttest_ind(d_temp, n_temp, equal_var=False).pvalue
@@ -126,6 +125,7 @@ def to_csv_(denovo_path, non_denovo_path, path):
     return 0
 
 if __name__ == "__main__":
+    
     denovo = ["./denovo/dchr1.csv","./denovo/dchr2.csv","./denovo/dchr3.csv","./denovo/dchr4.csv","./denovo/dchr5.csv",
                 "./denovo/dchr6.csv","./denovo/dchr7.csv","./denovo/dchr8.csv","./denovo/dchr9.csv","./denovo/dchr10.csv",
                 "./denovo/dchr11.csv","./denovo/dchr12.csv","./denovo/dchr13.csv","./denovo/dchr14.csv","./denovo/dchr15.csv",
@@ -153,5 +153,4 @@ if __name__ == "__main__":
     denovo_y = "./denovo/dchrY.csv"
     non_denovo_y = "./denovo/nchrY.csv"
     df = to_csv_(denovo_y, non_denovo_y, "./final_denovo/chrY.csv")
-
     
